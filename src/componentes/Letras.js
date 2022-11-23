@@ -29,8 +29,20 @@ const alfabeto = [
   "z",
 ];
 
-function Letras() {
-  return <div className="letras"></div>;
+function Letras(props) {
+  return (
+    <div className="letras">
+      {alfabeto.map((l) => (
+        <button
+          className={
+            props.habilitarLetras ? "habilitarLetras" : "desabilitarLetras"
+          }
+        >
+          {l.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  );
 }
 
 export default Letras;

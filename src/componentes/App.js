@@ -19,6 +19,9 @@ function App() {
     setPalavraSorteada(
       arrayPalavras[Math.floor(Math.random() * arrayPalavras.length)]
     );
+    setHabilitarInput(true);
+    setBotaoChutar(true);
+    setHabilitarLetras(true);
   }
 
   return (
@@ -27,8 +30,8 @@ function App() {
         escolherPalavra={escolherPalavra}
         palavraSorteada={palavraSorteada}
       />
-      <Letras />
-      <Chute />
+      <Letras habilitarLetras={habilitarLetras} />
+      <Chute habilitarInput={habilitarInput} botaoChutar={botaoChutar} />
     </div>
   );
 }
