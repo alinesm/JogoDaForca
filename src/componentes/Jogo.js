@@ -7,18 +7,25 @@ import React from "react";
 // Se você transformar a palavra em um array, será muito mais fácil de fazer as operações e comparações que irão acontecer no jogo 😉
 
 function Jogo(props) {
-  const mostrarPalavra = props.palavraSorteada.split("");
-  console.log(mostrarPalavra);
-  for (let i = 0; i < mostrarPalavra.length; i++) {
-    mostrarPalavra[i] = "_ ";
-  }
-  console.log(mostrarPalavra);
-
   return (
     <div className="jogo">
       <img alt="" src="./assets/forca0.png" />
       <button onClick={props.escolherPalavra}>Escolher Palavra</button>
-      <p>{mostrarPalavra}</p>
+      <p>
+        {props.palavraSorteada.split("").map((l) => {
+          return (
+            <span>
+              {props.letrasCorretas.includes(l) ? (
+                l
+              ) : (
+                <>
+                  <span>&nbsp;_&nbsp;</span>
+                </>
+              )}
+            </span>
+          );
+        })}
+      </p>
     </div>
   );
 }

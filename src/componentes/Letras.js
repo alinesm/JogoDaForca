@@ -34,6 +34,7 @@ function Letras(props) {
     <div className="letras">
       {alfabeto.map((l) => (
         <button
+          onClick={props.recebeLetraChutada}
           className={
             props.habilitarLetras ? "habilitarLetras" : "desabilitarLetras"
           }
