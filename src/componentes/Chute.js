@@ -1,19 +1,25 @@
 import React from "react";
 
 function Chute(props) {
+  const habilitarInput = props.hasGameStarted && props.habilitarInput;
+
+  const habilitarBotao = props.hasGameStarted && props.habilitarInput;
   return (
     <div className="chute">
       <p>Já sei a palavra!</p>
-      {props.habilitarInput ? (
-        <input type="text" />
+      {habilitarInput ? (
+        <input
+          onChange={props.pegarInput}
+          value={props.valorInput}
+          type="text"
+        />
       ) : (
         <input type="text" disabled="disabled" />
       )}
-
       <button
-        className={
-          props.botaoChutar ? "chutarHabilitado" : "chutarDesabilitado"
-        }
+        onClick={props.cliqueNoChute}
+        className={!habilitarBotao ? "" : "chutarHabilitado"}
+        disabled={!habilitarBotao}
       >
         Chutar
       </button>

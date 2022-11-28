@@ -40,6 +40,13 @@
   color: #000000;
 }
 
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+
 .letras {
   display: flex;
   width: 650px;
@@ -92,7 +99,8 @@
 }
 
 .chutarDesabilitado {
-  cursor: not-allowed;
+  /* cursor: not-allowed; */
+  /* disabled: disabled; */
 }
 
 .chutarHabilitado {

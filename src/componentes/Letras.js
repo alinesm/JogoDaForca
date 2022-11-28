@@ -32,16 +32,26 @@ const alfabeto = [
 function Letras(props) {
   return (
     <div className="letras">
-      {alfabeto.map((l) => (
-        <button
-          onClick={props.recebeLetraChutada}
-          className={
-            props.habilitarLetras ? "habilitarLetras" : "desabilitarLetras"
-          }
-        >
-          {l.toUpperCase()}
-        </button>
-      ))}
+      {alfabeto.map((letra) => {
+        if (props.hasGameStarted) {
+          const disabilitarLetra = props.letrasChutadas.includes(letra);
+
+          return (
+            <button
+              onClick={props.recebeLetraChutada}
+              className={disabilitarLetra ? "" : "habilitarLetras"}
+              disabled={disabilitarLetra}
+            >
+              {letra.toUpperCase()}
+            </button>
+          );
+        }
+        return (
+          <button onClick={props.recebeLetraChutada} className="" disabled>
+            {letra.toUpperCase()}
+          </button>
+        );
+      })}
     </div>
   );
 }
