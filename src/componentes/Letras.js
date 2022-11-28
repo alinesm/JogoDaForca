@@ -47,7 +47,11 @@ function Letras(props) {
         }
 
         return (
-          <button onClick={props.recebeLetraChutada} disabled>
+          <button
+            data-test="letter"
+            onClick={props.recebeLetraChutada}
+            disabled
+          >
             {letra.toUpperCase()}
           </button>
         );

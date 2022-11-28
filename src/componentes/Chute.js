@@ -13,7 +13,7 @@ function Chute(props) {
           type="text"
         />
       ) : (
-        <input type="text" disabled="disabled" />
+        <input data-test="guess-input" type="text" disabled="disabled" />
       )}
       <button
         data-test="guess-button"

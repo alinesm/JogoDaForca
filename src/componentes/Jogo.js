@@ -34,7 +34,7 @@ function Jogo(props) {
       <button data-test="choose-word" onClick={props.botaoEscolherPalavra}>
         Escolher Palavra
       </button>
-      <p>
+      <p data-test="word" data-answer={props.palavraSorteada}>
         {props.chuteCorreto && (
           <span className="green">{props.palavraSorteada}</span>
         )}
@@ -50,8 +50,6 @@ function Jogo(props) {
           props.palavraSorteada.split("").map((letra) => {
             return (
               <span
-                data-test="word"
-                data-answer={props.palavraSorteada}
                 className={
                   props.palavraSorteada
                     .split("")
