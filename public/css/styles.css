@@ -98,11 +98,6 @@
   color: #3c76a1;
 }
 
-.chutarDesabilitado {
-  /* cursor: not-allowed; */
-  /* disabled: disabled; */
-}
-
 .chutarHabilitado {
   cursor: pointer;
 }

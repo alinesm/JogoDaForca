@@ -1,16 +1,3 @@
-//clicar em uma letra
-// cehcar se ela letra faz parte da palavra
-// - se sim, preencher
-// - se nao,
-//- vai pro proxima figura
-//- coloca a letra em cinza
-//- incremneta numero de erros
-//- se o numero de erros for igual numero maximo OU a pessoa chutar errado
-//-boneco estara completo
-//- todas letras desabilitadas
-// - completa a palavra e fica na cor vermelha
-// se completar o nome antes do numero total de erros, a palavra fica verde e teclado desabilitao
-
 import { useState } from "react";
 import palavras from "../palavras";
 import Chute from "./Chute";
@@ -20,17 +7,13 @@ import Letras from "./Letras";
 function App() {
   const [palavraSorteada, setPalavraSorteada] = useState("");
   const [habilitarInput, setHabilitarInput] = useState(false);
-  const [botaoChutar, setBotaoChutar] = useState(false);
-  const [habilitarLetras, setHabilitarLetras] = useState(false);
-  const [letraChutada, setLetraChutada] = useState("");
-  const [letrasChutadas, setLetrasChutadas] = useState([]);
+  const [listaLetrasChutadas, setListaLetrasChutadas] = useState([]);
   const [letrasCorretas, setLetrasCorretas] = useState([]);
   const [letrasErradas, setLetrasErradas] = useState([]);
   const [valorInput, setValorInput] = useState("");
   const [chuteCorreto, setChuteCorreto] = useState(false);
-  const [chuteFeitoErrado, setChuteFeitoErrado] = useState(false);
-  const [corPalavra, setCorPalavra] = useState("");
-  const [hasGameStarted, setHasGameStarted] = useState(false);
+  const [chuteErrado, setChuteErrado] = useState(false);
+  const [jogoComecou, setJogoComecou] = useState(false);
 
   function pegarInput(e) {
     setValorInput(e.target.value);
@@ -38,27 +21,23 @@ function App() {
 
   const arrayPalavras = palavras;
 
-  function escolherPalavra() {
-    setHasGameStarted(true);
-    setLetrasChutadas([]);
-    setLetrasErradas([]);
-    setChuteCorreto(false);
-    setChuteFeitoErrado(false);
-    setValorInput("");
+  function botaoEscolherPalavra() {
     setPalavraSorteada(
       arrayPalavras[Math.floor(Math.random() * arrayPalavras.length)]
     );
+    setJogoComecou(true);
+    setListaLetrasChutadas([]);
+    setLetrasErradas([]);
+    setChuteCorreto(false);
+    setChuteErrado(false);
+    setValorInput("");
     setHabilitarInput(true);
-    setBotaoChutar(true);
-    setHabilitarLetras(true);
     setLetrasCorretas([]);
-    // setPalavraSorteada([]);
   }
 
   function recebeLetraChutada(event) {
     const letraClicada = event.target.innerHTML.toLowerCase();
-    setLetraChutada(letraClicada);
-    setLetrasChutadas((estado) => [...estado, letraClicada]);
+    setListaLetrasChutadas((estado) => [...estado, letraClicada]);
     console.log(palavraSorteada);
     if (palavraSorteada.includes(letraClicada)) {
       console.log("clicada", letraClicada);
@@ -72,8 +51,7 @@ function App() {
       setLetrasErradas(letrasAtuais);
       console.log("letras erradas", letrasAtuais);
       if (letrasAtuais.length >= 6) {
-        setHasGameStarted(false);
-        setTimeout(() => alert("acabou"), 1000);
+        setJogoComecou(false);
       }
     }
   }
@@ -83,44 +61,38 @@ function App() {
     if (palavraSorteada.toLowerCase() === valorInput.toLowerCase()) {
       console.log("iguais");
       setChuteCorreto(true);
-      setHasGameStarted(false);
+      setJogoComecou(false);
     } else {
-      console.log("diff");
-      setChuteFeitoErrado(true);
+      console.log("diferentes");
+      setChuteErrado(true);
       setChuteCorreto(false);
-      setHasGameStarted(false);
+      setJogoComecou(false);
     }
   }
 
   return (
     <div className="App">
       <Jogo
-        escolherPalavra={escolherPalavra}
+        botaoEscolherPalavra={botaoEscolherPalavra}
         palavraSorteada={palavraSorteada}
         letrasCorretas={letrasCorretas}
         letrasErradas={letrasErradas}
-        valorInput={valorInput}
-        setHasGameStarted={setHasGameStarted}
+        setJogoComecou={setJogoComecou}
         chuteCorreto={chuteCorreto}
-        chuteFeitoErrado={chuteFeitoErrado}
+        chuteErrado={chuteErrado}
       />
       <Letras
-        habilitarLetras={habilitarLetras}
-        letraChutada={letraChutada}
-        setLetraChutada={setLetraChutada}
         recebeLetraChutada={recebeLetraChutada}
-        letrasChutadas={letrasChutadas}
-        hasGameStarted={hasGameStarted}
+        listaLetrasChutadas={listaLetrasChutadas}
+        jogoComecou={jogoComecou}
       />
       <Chute
         pegarInput={pegarInput}
         valorInput={valorInput}
         cliqueNoChute={cliqueNoChute}
         habilitarInput={habilitarInput}
-        botaoChutar={botaoChutar}
         chuteCorreto={chuteCorreto}
-        corPalavra={corPalavra}
-        hasGameStarted={hasGameStarted}
+        jogoComecou={jogoComecou}
       />
     </div>
   );

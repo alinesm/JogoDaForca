@@ -1,5 +1,3 @@
-import React from "react";
-// Letras (conjunto de botões com as letras)
 const alfabeto = [
   "a",
   "b",
@@ -33,11 +31,12 @@ function Letras(props) {
   return (
     <div className="letras">
       {alfabeto.map((letra) => {
-        if (props.hasGameStarted) {
-          const disabilitarLetra = props.letrasChutadas.includes(letra);
+        if (props.jogoComecou) {
+          const disabilitarLetra = props.listaLetrasChutadas.includes(letra);
 
           return (
             <button
+              data-test="letter"
               onClick={props.recebeLetraChutada}
               className={disabilitarLetra ? "" : "habilitarLetras"}
               disabled={disabilitarLetra}
@@ -46,8 +45,9 @@ function Letras(props) {
             </button>
           );
         }
+
         return (
-          <button onClick={props.recebeLetraChutada} className="" disabled>
+          <button onClick={props.recebeLetraChutada} disabled>
             {letra.toUpperCase()}
           </button>
         );

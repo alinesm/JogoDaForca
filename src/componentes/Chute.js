@@ -1,14 +1,13 @@
-import React from "react";
-
 function Chute(props) {
-  const habilitarInput = props.hasGameStarted && props.habilitarInput;
+  const habilitarInput = props.jogoComecou && props.habilitarInput;
+  const habilitarBotao = props.jogoComecou && props.habilitarInput;
 
-  const habilitarBotao = props.hasGameStarted && props.habilitarInput;
   return (
     <div className="chute">
       <p>Já sei a palavra!</p>
       {habilitarInput ? (
         <input
+          data-test="guess-input"
           onChange={props.pegarInput}
           value={props.valorInput}
           type="text"
@@ -17,6 +16,7 @@ function Chute(props) {
         <input type="text" disabled="disabled" />
       )}
       <button
+        data-test="guess-button"
         onClick={props.cliqueNoChute}
         className={!habilitarBotao ? "" : "chutarHabilitado"}
         disabled={!habilitarBotao}
